@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    --background: 220 20% 4%;
+    --foreground: 0 0% 92%;
+
+    --card: 220 18% 7%;
+    --card-foreground: 0 0% 92%;
+
+    --popover: 220 18% 7%;
+    --popover-foreground: 0 0% 92%;
+
+    --primary: 42 80% 55%;
+    --primary-foreground: 220 20% 4%;
+
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 220 12% 14%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 42 80% 55%;
+    --accent-foreground: 220 20% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 15%;
+    --input: 220 15% 15%;
+    --ring: 42 80% 55%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 220 18% 6%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 42 80% 55%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 0 0% 85%;
+    --sidebar-border: 220 15% 15%;
+    --sidebar-ring: 42 80% 55%;
+
+    /* Page-specific accent colors */
+    --mv1-accent: 250 60% 55%;
+    --mv1-red: 0 75% 50%;
+    --mv2-pink: 330 90% 60%;
+    --mv2-cyan: 180 90% 55%;
+    --cgi-blue: 210 70% 45%;
+    --art-warm: 35 30% 75%;
+    --motion-vibrant: 280 80% 60%;
+    --commercial-gold: 42 80% 55%;
+
+    /* Grain overlay */
+    --grain-opacity: 0.03;
+  }
+
+  .dark {
+    --background: 220 20% 4%;
+    --foreground: 0 0% 92%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(42, 80%, 55%), hsl(42, 90%, 70%));
+  }
+
+  .text-gradient-neon {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(330, 90%, 60%), hsl(180, 90%, 55%));
+  }
+
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, transparent 40%, hsl(var(--background) / 0.8) 100%);
+  }
+
+  .cinematic-border {
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 0 30px -10px hsl(var(--primary) / 0.15);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px hsl(var(--primary) / 0.2);
+  }
+
+  .page-mv1 {
+    --page-accent: var(--mv1-accent);
+    --grain-opacity: 0.06;
+  }
+
+  .page-mv2 {
+    --page-accent: var(--mv2-cyan);
+    --grain-opacity: 0.02;
+  }
+
+  .page-cgi {
+    --page-accent: var(--cgi-blue);
+  }
+
+  .page-art {
+    --page-accent: var(--art-warm);
+    --grain-opacity: 0.01;
+  }
+
+  .page-motion {
+    --page-accent: var(--motion-vibrant);
+  }
+
+  .page-commercial {
+    --page-accent: var(--commercial-gold);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes reveal-line {
+  from { width: 0; }
+  to { width: 100%; }
+}
