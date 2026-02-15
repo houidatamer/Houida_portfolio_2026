@@ -1,11 +1,8 @@
 import ProjectLayout from "@/components/ProjectLayout";
-import heroImg from "@/assets/Dominique.png";
+import heroImg from "@/assets/dominique.png";
 import shot1 from "@/assets/pigomath.png";
 import shot2 from "@/assets/change2.png";
 import shot3 from "@/assets/m3.png";
-
-// shot3 has no import yet — using hero as fallback until you add one
-
 
 const MotionDesign = () => (
   <ProjectLayout
